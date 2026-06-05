@@ -1,7 +1,5 @@
 #!/bin/bash                                  
 
-source global_vars.sh
-
 mkdir GiBUU; cd GiBUU
 wget --content-disposition https://gibuu.hepforge.org/downloads?f=release2025.tar.gz;tar -xzvf release2025.tar.gz
 wget --content-disposition https://gibuu.hepforge.org/downloads?f=buuinput2025.tar.gz; tar -xzvf buuinput2025.tar.gz
