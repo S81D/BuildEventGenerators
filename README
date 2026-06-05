@@ -13,3 +13,11 @@ cd jobcards;
 # To setup the enviroment, source the setup script every time that you connect to the gpvm machines
 
 source setup_generators.sh
+
+
+### For ANNIE (gpvms):
+
+GiBUU build:
+- enter (ToolAnalysis) singularity container
+- source annie_setup.sh
+- sh build_gibuu.sh
