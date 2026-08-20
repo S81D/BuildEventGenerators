@@ -1,23 +1,45 @@
-# All these commands need to be ran on the FNAL gpvm's
+# All these commands need to be ran on the ANNIE FNAL gpvm's
 
-# To build / link all the event generators + Nuisance
+# NOTE THAT THIS IS PURELY FOR A NEUT BUILD / NC ANALYSIS DOCUMENTATION
 
-git clone https://github.com/afropapp13/BuildEventGenerators.git;
+# To build / link NEUT + Nuisance
+
+git clone https://github.com/S81D/BuildEventGenerators.git
 cd BuildEventGenerators;
-./build_generators.sh;
 
-# To test that the build was successful by producing a few events
-cd jobcards;
-./run_all.sh;
+# Enter the GENIE container
+singularity shell -B/pnfs:/pnfs,/cvmfs:/cvmfs,/exp/annie/data:/exp/annie/data,/exp/annie/app:/exp/annie/app /cvmfs/singularity.opensciencegrid.org/anniesoft/genie3:latest/
 
-# To setup the enviroment, source the setup script every time that you connect to the gpvm machines
+# Build NEUT
+git clone <neut repo link>
+cd neut && mkdir build && cd build
+cmake .. -DNEUT_DOWNLOAD_DATA=OFF -DNEUT_WERROR_ENABLED=OFF
+make -j4 && make install
 
-source setup_generators.sh
+# Activate NEUT
+source neut/build/Linux/bin/setup.NEUT.sh
+export LD_LIBRARY_PATH=$(root-config --libdir):$LD_LIBRARY_PATH   # NEUT binaries don't rpath ROOT
+
+# Build NUISANCE
+git clone https://github.com/NUISANCEMC/nuisance.git
+cd nuisance && mkdir build && cd build
+cmake .. -DNEUT_ENABLED=ON -DGENIE_ENABLED=OFF -DNuWro_ENABLED=OFF -DGiBUU_ENABLED=OFF \
+         -DCMAKE_BUILD_TYPE=Debug -DProb3plusplus_ENABLED=ON -Dnusystematics_ENABLED=OFF -DNuHepMC_ENABLED=OFF
+make -j4 && make install
+
+# Activate NUISANCE
+source nuisance/build/Linux/setup.sh
+
+# For actually generating NEUT events:
+# Write a NEUT toml config — key fields: species, target composition, mode_choice_type ("normal" for everything, "rescaled" + a mode_rescaling table to isolate specific channels e.g. NC-only), and either a flux histogram (energy_spectrum_type = "root") or a fixed energy ("fixed" + energy_mev) --> see `annie_neut_xsec.toml` / `annie_neut_nc_nue.toml` / `annie_neut_nc_numu.toml` for examples. 
+# Generate the events:
+neutroot2 config.toml output.root
+
+# Flatten with NUISANCE
+PrepareNEUT -i output.root -f flux_file.root,flux_hist_name -G -o prepared.root   # -G only if the flux hist's x-axis is GeV, not MeV
+# for a fixed-energy run instead: PrepareNEUT -i output.root -m <energy_MeV> -o prepared.root
+nuisflat -i NEUT:prepared.root -f GenericVectors -o flat.root
+
+# You can then analyze the flattrees or pass them to downstream MC infrastructure
 
 
-### For ANNIE (gpvms):
-
-GiBUU build:
-- enter (ToolAnalysis) singularity container
-- source annie_setup.sh
-- sh build_gibuu.sh

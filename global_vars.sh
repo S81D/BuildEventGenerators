@@ -31,6 +31,12 @@ then
 	source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
 fi
 
+# ANNIE (use uboone instead lol)
+if [[ "${hostgpvm}" == "annie" ]] 
+then 
+	source /cvmfs/uboone.opensciencegrid.org/products/setup_uboone_mcc9.sh
+fi
+
 setup root v6_28_12 -q e26:p3915:prof                      
 setup lhapdf v6_5_4 -q e26:p3915:prof                                           
 setup log4cpp v1_1_3e -q e26:prof                                            

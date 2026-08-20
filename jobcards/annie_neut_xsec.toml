@@ -1,6 +1,6 @@
 [neut]
 
-number_of_events = 100 # the number of probe interactions to simulate
+number_of_events = 100000 # the number of probe interactions to simulate
 
 # cross_section_table_path = "../data" # this can be used to override $NEUT_CRSPATH
 
@@ -12,7 +12,7 @@ rng_seed = "time"
 # rng_seed = "file"
 
 output_format = "neutroot"
-#output_format = "NuHepMC"
+# output_format = "NuHepMC"
 
 simulation_mode = "neutrino" # This option includes electron scattering
 # simulation_mode = "others"
@@ -53,15 +53,15 @@ direction_type = "z" # probe approaches target along [0.0, 0.0, 1.0]
 # energy_range_mev = [100.0, 1000.0]
 #
 energy_spectrum_type = "root"
-#energy_histogram = [ "MCC9_FluxHist_volTPCActive.root", "hEnumu_cv", "gev"]
-energy_histogram = [ "sbnd_flux.root", "flux_sbnd_numu", "gev"]
+energy_histogram = [ "/pnfs/annie/persistent/users/jminock/fake-data-nuwro/flux_hists/gsimple_hist.true.root", "hEnumu_cv", "gev"]
 
 [neut.target]
 
 # example for H20, two free protons and an oxygen nuclei.
-num_nucleons = 40
-num_bound_protons = 18
+num_nucleons = 16
+num_bound_protons = 8
 num_free_protons = 0
+#num_free_protons = 2
 
 #or for some magic targets can set based on name:
 # target_name = "H2O" # or C, CH, Fe, Pb
@@ -125,8 +125,8 @@ pauli_blocking_fsi = "on"
 # pauli_blocking_fsi = "hybrid" # Reduces PB probability for nucleons with KE < 150
 
 nucleon_absorption_and_pion_ejection = "on"
-deexcitation = "o16_deexcitation"
-#deexcitation = "nucdeex" # PRD 109, 036009
+#deexcitation = "o16_deexcitation"
+deexcitation = "nucdeex" # PRD 109, 036009
 
 # formation_length = "on"
 # formation_length = "off"
@@ -222,23 +222,23 @@ mode_choice_type = "normal" # choose according to nominal cross-section predicti
 "CC_multi_pi_nu" = 1.0
 "CC_DIS_nu" = 1.0
 
-"NC_elastic_free_p_nu" = 0.0
-"NC_elastic_bound_p_nu" = 0.0
-"NC_elastic_n_nu" = 0.0
-"NC_RES_npi0_nu" = 0.0
-"NC_RES_ppi0_nu" = 0.0
-"NC_RES_ppi-_nu" = 0.0
-"NC_RES_npi+_nu" = 0.0
-"NC_COH_nu" = 0.0
-"NC_DIF_nu" = 0.0
-"NC_eta_n_nu" = 0.0
-"NC_eta_p_nu" = 0.0
-"NC_kaon_n_nu" = 0.0
-"NC_kaon_p_nu" = 0.0
-"NC_multi_pi_nu" = 0.0
-"NC_1gamma_n_nu" = 0.0
-"NC_1gamma_p_nu" = 0.0
-"NC_DIS_nu" = 0.0
+"NC_elastic_free_p_nu" = 1.0
+"NC_elastic_bound_p_nu" = 1.0
+"NC_elastic_n_nu" = 1.0
+"NC_RES_npi0_nu" = 1.0
+"NC_RES_ppi0_nu" = 1.0
+"NC_RES_ppi-_nu" = 1.0
+"NC_RES_npi+_nu" = 1.0
+"NC_COH_nu" = 1.0
+"NC_DIF_nu" = 1.0
+"NC_eta_n_nu" = 1.0
+"NC_eta_p_nu" = 1.0
+"NC_kaon_n_nu" = 1.0
+"NC_kaon_p_nu" = 1.0
+"NC_multi_pi_nu" = 1.0
+"NC_1gamma_n_nu" = 1.0
+"NC_1gamma_p_nu" = 1.0
+"NC_DIS_nu" = 1.0
 
 "CC_QE_free_proton_nubar" = 1.0
 "CC_QE_bound_proton_nubar" = 1.0
@@ -254,23 +254,23 @@ mode_choice_type = "normal" # choose according to nominal cross-section predicti
 "CC_multi_pi_nubar" = 1.0
 "CC_DIS_nubar" = 1.0
 
-"NC_elastic_free_p_nubar" = 0.0
-"NC_elastic_bound_p_nubar" = 0.0
-"NC_elastic_n_nubar" = 0.0
-"NC_RES_npi0_nubar" = 0.0
-"NC_RES_ppi0_nubar" = 0.0
-"NC_RES_ppi-_nubar" = 0.0
-"NC_RES_npi+_nubar" = 0.0
-"NC_COH_nubar" = 0.0
-"NC_DIF_nubar" = 0.0
-"NC_eta_n_nubar" = 0.0
-"NC_eta_p_nubar" = 0.0
-"NC_kaon_n_nubar" = 0.0
-"NC_kaon_p_nubar" = 0.0
-"NC_1gamma_n_nubar" = 0.0
-"NC_1gamma_p_nubar" = 0.0
-"NC_multi_pi_nubar" = 0.0
-"NC_DIS_nubar" = 0.0
+"NC_elastic_free_p_nubar" = 1.0
+"NC_elastic_bound_p_nubar" = 1.0
+"NC_elastic_n_nubar" = 1.0
+"NC_RES_npi0_nubar" = 1.0
+"NC_RES_ppi0_nubar" = 1.0
+"NC_RES_ppi-_nubar" = 1.0
+"NC_RES_npi+_nubar" = 1.0
+"NC_COH_nubar" = 1.0
+"NC_DIF_nubar" = 1.0
+"NC_eta_n_nubar" = 1.0
+"NC_eta_p_nubar" = 1.0
+"NC_kaon_n_nubar" = 1.0
+"NC_kaon_p_nubar" = 1.0
+"NC_1gamma_n_nubar" = 1.0
+"NC_1gamma_p_nubar" = 1.0
+"NC_multi_pi_nubar" = 1.0
+"NC_DIS_nubar" = 1.0
 
 [neut.interaction_model.radiative_corrections]
 
@@ -289,10 +289,10 @@ q3_dependent_eb = { enabled = "off", gradient = 0, intercept = 0 }
 
 [neut.interaction_model.QE]
 
-model = "nieves" # use SF model by ueno-mori for NC (unrecommend)
+#model = "nieves" # use SF model by ueno-mori for NC (unrecommend)
 #model = "nieves_furmanski_abe" # use SF model by furmanski-abe for NC
-#model = "rome" # Benhar SF
-#model = "llewelyn-smith"
+model = "rome" # Benhar SF
+# model = "llewelyn-smith"
 #model = "rmf"
 
 erpa = "off" # incompatible with model = "nieves", use nieves.rpa = "on" instead
@@ -420,8 +420,8 @@ form = "dipole"
 
 # Axial mass for dipole form factor
 [neut.interaction_model.QE.axial_form_factors.dipole]
-axial_mass = 1.05
-#nc_axial_mass = 1.05
+axial_mass = 1.21
+nc_axial_mass = 1.21
 
 [neut.interaction_model.QE.axial_form_factors.n_component]
 
